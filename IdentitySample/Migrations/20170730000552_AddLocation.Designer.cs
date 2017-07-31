@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using IdentitySample.Models;
+using IdentitySample.Data;
 
 namespace IdentitySample.Migrations
 {

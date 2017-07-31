@@ -1,0 +1,23 @@
+﻿@model IEnumerable<UserViewModel>
+
+    <h2>Users</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>Role 1, Role 2</td>
+                    <td><a asp-controller="UserManagement" asp-action="AddRole">Add Role</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>

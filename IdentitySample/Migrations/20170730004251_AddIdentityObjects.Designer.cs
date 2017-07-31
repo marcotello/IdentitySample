@@ -1,9 +1,9 @@
-﻿using System;
+﻿using IdentitySample.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using IdentitySample.Models;
+using System;
 
 namespace IdentitySample.Migrations
 {
