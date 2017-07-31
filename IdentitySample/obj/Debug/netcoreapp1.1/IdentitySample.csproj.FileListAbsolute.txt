@@ -1,0 +1,9 @@
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\bin\Debug\netcoreapp1.1\IdentitySample.deps.json
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\bin\Debug\netcoreapp1.1\IdentitySample.runtimeconfig.json
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\bin\Debug\netcoreapp1.1\IdentitySample.runtimeconfig.dev.json
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\bin\Debug\netcoreapp1.1\IdentitySample.dll
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\obj\Debug\netcoreapp1.1\IdentitySample.csprojResolveAssemblyReference.cache
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\obj\Debug\netcoreapp1.1\IdentitySample.AssemblyInfo.cs
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\bin\Debug\netcoreapp1.1\IdentitySample.pdb
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\obj\Debug\netcoreapp1.1\IdentitySample.dll
+c:\users\marco\documents\visual studio 2017\Projects\IdentitySample\IdentitySample\obj\Debug\netcoreapp1.1\IdentitySample.pdb
