@@ -1,6 +1,14 @@
-﻿@model IdentitySample.Models.ViewModels.RoleViewModel
+﻿@model IdentitySample.Models.ViewModels.UserManagementAddRoleViewModel
 
+<h3>Add Role for @Model.Email</h3>
+<div asp-validation-summary="All"></div>
 <form asp-controller="UserManagement" asp-action="AddRole" method="post">
-
-
+    <div>
+        <input asp-for="UserId" type="hidden" />
+        <select asp-for="NewRole" asp-items="Model.Roles">
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Add Role" />
+    </div>
 </form>

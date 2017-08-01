@@ -1,51 +1,80 @@
-﻿using IdentitySample.Models;
+﻿using IdentitySample.Data;
+using IdentitySample.Models;
 using IdentitySample.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IdentitySample.Controllers
 {
     public class UserManagementController : Controller
     {
+        private readonly IdentitySampleContext _identitySampleContext;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserManagementController(UserManager<ApplicationUser> userManager)
+        public UserManagementController(IdentitySampleContext identitySampleContext, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            _identitySampleContext = identitySampleContext;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            List<UserViewModel> users = new List<UserViewModel>();
-
-            users = _userManager.Users.Select(u => new UserViewModel
+            var vm = new UserManagementIndexViewModel
             {
-                Id = u.Id,
-                Email = u.Email,
-                //Roles = u.Roles
-            }).OrderBy(u => u.Email).ToList();
+                Users = _identitySampleContext.Users.OrderBy(u => u.Email).Include(u => u.Roles).ToList()
+            };
 
-            return View(users);
+            return View(vm);
         }
 
         [HttpGet]
-        public IActionResult AddRole()
+        public async Task<IActionResult> AddRole(string id)
         {
-            return View();
+            var user = await GetUserById(id);
+
+            var vm = new UserManagementAddRoleViewModel
+            {
+                Roles = GetAllRoles(),
+                UserId = id,
+                Email = user.Email
+            };
+
+            return View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddRole(RoleViewModel roleViewModel)
+        public async Task<IActionResult> AddRole(UserManagementAddRoleViewModel vm)
         {
-            var user = await _userManager.FindByIdAsync(roleViewModel.UserId);
-            await _userManager.AddToRoleAsync(user, roleViewModel.NewRole);
+            var user = await GetUserById(vm.UserId);
 
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var result = await _userManager.AddToRoleAsync(user, vm.NewRole);
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+            }
+            vm.Roles = GetAllRoles();
+            vm.Email = user.Email;
+            return View(vm);
         }
+
+        private async Task<ApplicationUser> GetUserById(string id) => await _userManager.FindByIdAsync(id);
+
+        private SelectList GetAllRoles() => new SelectList(_roleManager.Roles.OrderBy(r => r.Name));
     }
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<UserViewModel>
+﻿@model IdentitySample.Models.ViewModels.UserManagementIndexViewModel
+@inject UserManager<ApplicationUser> userManager
 
     <h2>Users</h2>
 
@@ -11,12 +12,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in Model)
+            @foreach (var user in Model.Users)
             {
                 <tr>
                     <td>@user.Email</td>
-                    <td>Role 1, Role 2</td>
-                    <td><a asp-controller="UserManagement" asp-action="AddRole">Add Role</a></td>
+                    <td>@(string.Join(",", await userManager.GetRolesAsync(user)))</td>
+                    <td><a asp-controller="UserManagement" asp-action="AddRole" asp-route-id="@user.Id">Add Role</a></td>
                 </tr>
             }
         </tbody>
