@@ -1,30 +1,58 @@
 ﻿@model LoginViewModel
 
-<h2>Login</h2>
+@{
+    Layout = "";
+}
 
-<form method="post" asp-action="Login" asp-controler="Account">
-    <div asp-validation-summary="All"></div>
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Authentication Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon">
+    <link href="~/css/vendor.bundle.css" rel="stylesheet" />
+    <link href="~/css/app.css" rel="stylesheet" />
+    <link href="~/css/theme-a.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+</head>
+<body id="auth_wrapper">
+    <div id="login_wrapper">
+
+        <div id="login_content">
+            <div class="logo">
+                <img src="~/img/logo/Vidanta2.png" alt="logo" class="logo-img">
+            </div>
+            <h1 class="login-title">Authentication Demo</h1>
+            <div class="login-body">
+                <form method="post" asp-action="Login" asp-controler="Account">
+                    <div asp-validation-summary="All"></div>
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label" asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control">
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label" asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control">
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div>
+                        <label asp-for="RememberMe"></label>
+                        <input asp-for="RememberMe" />
+                        <span asp-validation-for="RememberMe"></span>
+                    </div>
+                    <div>
+                        <input type="submit" value="Log In" class="btn btn-info btn-block m-t-40" />
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="RememberMe"></label>
-        <input asp-for="RememberMe" />
-        <span asp-validation-for="RememberMe"></span>
-    </div>
-    <div>
-        <input type="submit" value="Log In" />
-    </div>
-</form>
-<br />
-<br />
-<div>
-    <a asp-action="Register">Register</a>
-</div>
+    <script src="~/js/vendor.bundle.js"></script>
+    <script src="~/js/app.bundle.js"></script>
+</body>
+</html>

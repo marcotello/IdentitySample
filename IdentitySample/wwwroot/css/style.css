@@ -1,0 +1,42 @@
+body#auth_wrapper {
+  background-color: #01579b; 
+}
+
+body #app_wrapper #app_topnavbar-wrapper {
+    background-color: #01579b;
+    color: #fff;
+}
+
+body #app_wrapper #footer_wrapper {
+    background: #01579b;
+}
+
+#app_main-menu-wrapper .sidebar-header {
+  color: #0288d1;
+  opacity: 0.5;
+  margin: 0;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  font-size: 0.6875em;
+  display: block; 
+}
+
+#footer_wrapper .footer-content .copy-wrapper {
+  padding: 10px 0 0;
+  margin: 10px 0 0; 
+  text-align: center;
+}
+
+@media screen and (min-width: 480px) {
+    #input-token { width: 200px; }
+}
+
+@media screen and (min-width: 780px) {
+    #input-token { width: 600px; margin-right: 50px; }
+}
+
+body #app_wrapper #app_sidebar-left #app_main-menu-wrapper .nav-pills>li.active>a, body #app_wrapper #app_sidebar-left #app_main-menu-wrapper .nav-pills>li.active>a:focus, body #app_wrapper #app_sidebar-left #app_main-menu-wrapper .nav-pills>li.active>a:hover {
+    background-color: #eaf3f8;
+    color: #252d38;
+    border-left-color: #f4b400;
+}

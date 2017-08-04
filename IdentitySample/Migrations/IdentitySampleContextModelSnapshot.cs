@@ -1,8 +1,9 @@
-﻿using IdentitySample.Data;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+using IdentitySample.Data;
 
 namespace IdentitySample.Migrations
 {
@@ -75,6 +76,24 @@ namespace IdentitySample.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Location");
+                });
+
+            modelBuilder.Entity("IdentitySample.Models.Reservation", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("ArrivalDate");
+
+                    b.Property<DateTime>("DepartureDate");
+
+                    b.Property<string>("PmsReservationID");
+
+                    b.Property<string>("ReservationNumber");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Reservation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>

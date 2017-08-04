@@ -23,5 +23,7 @@ namespace IdentitySample.Data
             modelBuilder.Entity<Location>().ToTable("Location");
 
         }
+
+        public DbSet<IdentitySample.Models.Reservation> Reservation { get; set; }
     }
 }

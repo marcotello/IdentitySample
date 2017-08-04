@@ -1,24 +1,118 @@
 ﻿@model IdentitySample.Models.ViewModels.UserManagementIndexViewModel
 @inject UserManager<ApplicationUser> userManager
 
-    <h2>Users</h2>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model.Users)
-            {
-                <tr>
-                    <td>@user.Email</td>
-                    <td>@(string.Join(",", await userManager.GetRolesAsync(user)))</td>
-                    <td><a asp-controller="UserManagement" asp-action="AddRole" asp-route-id="@user.Id">Add Role</a></td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="card card-data-tables customer-table-wrapper">
+            <header class="card-heading">
+                <h2 class="card-title">Users</h2>
+                <small class="dataTables_info"></small>
+                <div class="card-search">
+                    <div id="productsTable_wrapper" class="form-group label-floating is-empty">
+                        <i class="zmdi zmdi-search search-icon-left"></i>
+                        <input type="text" class="form-control filter-input" placeholder="Filter Products..." autocomplete="off">
+                        <a href="javascript:void(0)" class="close-search" data-card-search="close" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="zmdi zmdi-close"></i></a>
+                    </div>
+                </div>
+                <ul class="card-actions icons right-top">
+                    <li id="deleteItems" style="display: none;">
+                        <span class="label label-info pull-left m-t-5 m-r-10 text-white"></span>
+                        <a href="javascript:void(0)" id="confirmDelete" data-toggle="tooltip" data-placement="top" data-original-title="Delete Product(s)">
+                            <i class="zmdi zmdi-delete"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-card-search="open" data-toggle="tooltip" data-placement="top" data-original-title="Filter Products">
+                            <i class="zmdi zmdi-filter-list"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown" data-toggle="tooltip" data-placement="top" data-original-title="Show Entries">
+                        <a href="javascript:void(0)" data-toggle="dropdown">
+                            <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+                        <div id="dataTablesLength">
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" data-original-title="Export All">
+                            <i class="zmdi zmdi-inbox"></i>
+                        </a>
+                    </li>
+                </ul>
+            </header>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <div id="orderTable_wrapper" class="dataTables_wrapper form-inline dt-material no-footer">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <div class="dataTables_length" id="orderTable_length">
+                                    <label>
+                                        Show
+                                        <select name="orderTable_length" aria-controls="orderTable" class="form-control input-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select> entries
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <div id="orderTable_filter" class="dataTables_filter">
+                                    <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="orderTable"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-grid dt-table">
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <table id="orderTable" class="mdl-data-table customer-table m-t-30 dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="orderTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th data-orderable="false" class="col-xs-1 sorting_disabled" rowspan="1" colspan="1" aria-label=" " style="width: 91px;">
+                                                <span class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" id="checkAll" class="checkbox-material"><span class="check"></span>
+                                                        <span class="checkbox-material"></span>
+                                                    </label>
+                                                </span>
+                                            </th>
+                                            <th class="col-xs-1 sorting" tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 87px;">User</th>
+                                            <th class="col-xs-2 sorting_disabled" tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label=" " style="width: 205px;">Roles</th>
+                                            <th data-orderable="false" class="col-xs-2 sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 233px;"><button class="btn btn-primary btn-fab  animate-fab"><i class="zmdi zmdi-plus"></i></button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var user in Model.Users)
+                                        {
+                                            <tr role="row" class="odd">
+                                                <td class="checkbox-cell">
+                                                    <span class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" value="" id="CheckboxId_14"><span class="checkbox-material"><span class="check"></span></span>
+                                                            <span class="checkbox-material"></span>
+                                                        </label>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <div class="text-center">
+                                                        <span class="avatar"><img src="~/img/profiles/10.jpg" alt="" class="img-circle max-w-40"></span>
+                                                        <span class="name block m-t-10 m-b-10">@user.Email</span>
+                                                    </div>
+                                                </td>
+                                                <td>@(string.Join(",", await userManager.GetRolesAsync(user)))</td>
+                                                <td>
+                                                    <a asp-controller="UserManagement" asp-action="AddRole" asp-route-id="@user.Id" class="icon edit-customer"><i class="zmdi zmdi-edit"></i></a>
+                                                    <a href="javascript:void(0)" class="icon edit-customer"><i class="zmdi zmdi-delete"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
